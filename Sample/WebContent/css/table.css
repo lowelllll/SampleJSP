@@ -1,0 +1,36 @@
+article {
+	width: 60%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 50px;
+    height: 100%;
+}
+
+.member_table , .money_table{
+	width: 100%;
+    min-height: 400px;
+    margin-top: 20px;
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+	border-collapse: collapse;
+}
+
+.money_table {
+	min-height:200px;
+}
+
+
+thead {
+	background-color:#caa8d9;
+}
+
+thead tr {
+	height: 40px;
+	color:#fff;
+}
+
+tbody tr {
+	border-bottom: 1px solid #ddd;
+}
