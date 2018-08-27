@@ -10,7 +10,7 @@ public class Db {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	private Connection getConnection () throws Exception{ // db connectionÀ» ¾ò´Â ÇÔ¼ö
+	private Connection getConnection () throws Exception{ // db connectionì„ ì–»ëŠ” í•¨ìˆ˜
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "hr";
 		String password = "hr";
@@ -26,7 +26,7 @@ public class Db {
 		String sql = "INSERT INTO member_tbl_02 VALUES (seq.NEXTVAL,?,?,?,?,?,?)";
 
 		try {
-			conn = getConnection(); // DB connectionÀ» ¾òÀ½
+			conn = getConnection(); // DB connectionì„ ì–»ìŒ
 			pstmt = conn.prepareStatement(sql); 
 			pstmt.setString(1, custname); 
 			pstmt.setString(2, phone);
@@ -36,7 +36,7 @@ public class Db {
 			pstmt.setString(6, city);
 			pstmt.executeQuery(); 
 
-			result = true; // insert ¼º°ø ½Ã true ¹İÈ¯
+			result = true; // insert ì„±ê³µ ì‹œ true ë°˜í™˜
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class Db {
 		}
 	}
 
-	// register¿¡¼­ È¸¿ø ¹øÈ£¸¦ º¸¿©ÁÖ´Â ÇÔ¼ö
+	// registerì—ì„œ íšŒì› ë²ˆí˜¸ë¥¼ ë³´ì—¬ì£¼ëŠ” í•¨ìˆ˜
 	public ResultSet selectCustno () {
 		String sql = "SELECT MAX(custno)+1 FROM member_tbl_02";
 		try {
@@ -67,7 +67,7 @@ public class Db {
 		}
 	}
 
-	// È¸¿ø ¸ñ·Ï Á¶È¸
+	// íšŒì› ëª©ë¡ ì¡°íšŒ
 	public ResultSet selectUserList() {
 		String sql = "SELECT custno, custname, phone, address, TO_CHAR(joindate,'YYYY-MM-DD'),grade,city FROM member_tbl_02 ORDER BY custno ASC";
 		try {
@@ -82,7 +82,7 @@ public class Db {
 		}
 	}
 
-	// È¸¿ø Á¤º¸ Á¶È¸
+	// íšŒì› ì •ë³´ ì¡°íšŒ
 	public ResultSet selectUser (String custno) {
 		String sql = "SELECT custno,custname,phone,address,TO_CHAR(joindate,'YYYY-MM-DD'),grade,city FROM member_tbl_02 WHERE custno = ?";
 		try {
@@ -98,13 +98,13 @@ public class Db {
 		}
 	}
 
-	// È¸¿ø Á¤º¸ ¼öÁ¤
+	// íšŒì› ì •ë³´ ìˆ˜ì •
 	public boolean updateUser (String custname,String phone,String address,String joindate,String grade,String city,String custno) {
 		boolean result = false;
 		String sql = "UPDATE member_tbl_02 SET custname = ? , phone = ? , address = ?, joindate = ? , grade = ? , city = ? WHERE custno = ?";
 
 		try {
-			conn = getConnection(); // DB connectionÀ» ¾òÀ½
+			conn = getConnection(); // DB connectionì„ ì–»ìŒ
 			pstmt = conn.prepareStatement(sql); 
 			pstmt.setString(1, custname); 
 			pstmt.setString(2, phone);
@@ -115,7 +115,7 @@ public class Db {
 			pstmt.setInt(7, Integer.parseInt(custno));
 			pstmt.executeQuery(); 
 
-			result = true; // insert ¼º°ø ½Ã true ¹İÈ¯
+			result = true; // insert ì„±ê³µ ì‹œ true ë°˜í™˜
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -131,9 +131,9 @@ public class Db {
 		}
 	}
 	
-	// È¸¿ø ¸ÅÃâ Á¤º¸ Á¶È¸
+	// íšŒì› ë§¤ì¶œ ì •ë³´ ì¡°íšŒ
 		public ResultSet selectMoneyList() {
-			String sql = "SELECT e.custno, e.custname, e.grade , m.price FROM member_tbl_02 e , (SELECT custno, sum(price) price FROM money_tbl_02 GROUP BY custno) m WHERE e.custno = m.custno";
+			String sql = "SELECT e.custno, e.custname, e.grade , m.price FROM member_tbl_02 e , (SELECT custno, sum(price) price FROM money_tbl_02 GROUP BY custno) m WHERE e.custno = m.custno ORDER BY custno DESC";
 			try {
 				conn = getConnection();
 				pstmt = conn.prepareStatement(sql);
