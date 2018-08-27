@@ -60,7 +60,7 @@
 							<tr>
 								<td colspan="2">
 									<button type="button" class="btn">등록</button>
-									<a href=""><button>조회</button></a>
+									<a href=""><button type="button">조회</button></a>
 								</td>
 							</tr>
 						</table>

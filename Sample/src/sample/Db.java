@@ -69,7 +69,7 @@ public class Db {
 
 	// 회원 목록 조회
 	public ResultSet selectUserList() {
-		String sql = "SELECT* FROM member_tbl_02 ORDER BY custno ASC";
+		String sql = "SELECT custno, custname, phone, address, TO_CHAR(joindate,'YYYY-MM-DD'),grade,city FROM member_tbl_02 ORDER BY custno ASC";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
